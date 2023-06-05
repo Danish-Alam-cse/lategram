@@ -19,8 +19,9 @@
   <div class="container-fluid">
     <a class="navbar-brand"><?php echo $row['name'];
  ?></a>
+    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=juweriafatima7289@gmail.com" target="_blank" class="p-3">Mail Us</a>
+
     <a href="logout.php" class="btn btn-danger">Logout</a>
-    <a href="mypost.php" class="btn btn-primary">My posts</a>
 
 
     <form class="d-flex" method="get">
@@ -35,7 +36,7 @@
         <div class="col-lg-12">
             <div class="row">
                 <?php 
-                $fetch = mysqli_query($con,"select users.name,posts.content,posts.post_time,posts.image from users join posts on users.id = posts.user_id where email = '$email'");
+                $fetch = mysqli_query($con,"select users.name,posts.content,posts.post_time,posts.image,posts.post_id from users join posts on users.id = posts.user_id where email = '$email'");
                 while($rows=mysqli_fetch_array($fetch)){?>
                 <div class="col-lg-4 mb-2">
                     <div class="card" style="height:420px">
@@ -46,8 +47,8 @@
                             <p><?php echo $rows['post_time'];?></p>
                         </div>
                         <div class="card-footer">
-                            <a href="edit.php?edit=<?=$rows['id'];?>" class="btn btn-primary">edit</a>
-                            <a href="delete.php?del=<?=$rows['id'];?>" class="btn btn-danger">X</a>
+                            <a href="edit.php?edit=<?=$rows['post_id'];?>" class="btn btn-primary">edit</a>
+                            <a href="delete.php?del=<?=$rows['post_id'];?>" class="btn btn-danger">X</a>
                         </div>
                     </div>
                 </div>

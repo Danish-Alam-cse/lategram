@@ -2,6 +2,9 @@
     include "config.php";
     session_start();
     $email = $_SESSION['user_email'];
+    if(!$email){
+        header("location: login.php");
+    }
     $q = mysqli_query($con,"select * from users where email ='$email'");
     $row = mysqli_fetch_array($q);
 ?>
@@ -50,7 +53,13 @@
         <div class="col-lg-8">
             <div class="row">
                 <?php 
-                $fetch = mysqli_query($con,"select users.name,posts.content,posts.post_time,posts.image from users join posts on users.id = posts.user_id");
+                if(isset($_GET['find'])){
+                    $search = $_GET['search'];
+                    $fetch = mysqli_query($con,"select users.name,posts.content,posts.post_time,posts.image,posts.post_id from users join posts on users.id = posts.user_id where posts.content like '%$search%'");
+                }
+                else{
+                $fetch = mysqli_query($con,"select users.name,posts.content,posts.post_time,posts.image,posts.post_id from users join posts on users.id = posts.user_id");
+                }
                 while($rows=mysqli_fetch_array($fetch)){?>
                 <div class="col-lg-4 mb-2">
                     <div class="card" style="height:420px">
@@ -59,6 +68,9 @@
                             <p class="card-title">Wriiten by :-<?php echo $rows['name'];?></p>
                             <p class="card-text"><?php echo $rows['content'];?></p>
                             <p><?php echo $rows['post_time'];?></p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="desc.php?more=<?= $rows['post_id'];?>" class="btn btn-success">Read More</a>
                         </div>
                     </div>
                 </div>
