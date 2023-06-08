@@ -5,7 +5,6 @@ include "config.php";
     if(!$email){
         header("location: login.php");
     }
-    echo $_GET['del'];
     if(isset($_GET['del'])){
         $del = $_GET['del'];
         $q = mysqli_query($con,"delete from posts where post_id='$del'");

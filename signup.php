@@ -35,7 +35,7 @@
     if(isset($_POST['signup'])){
         $name = $_POST['name'];
         $email = $_POST['email'];
-        $password = $_POST['password'];
+        $password = md5($_POST['password']);
         $signup = mysqli_query($con,"insert into users(name,email,password)values('$name','$email','$password')");
         if($signup){
             header("location: login.php");

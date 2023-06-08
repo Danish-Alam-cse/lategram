@@ -31,7 +31,7 @@
 <?php
     if(isset($_POST['login'])){
         $email = $_POST['email'];
-        $password = $_POST['password'];
+        $password = md5($_POST['password']);
         $login = mysqli_query($con,"select * from users where email = '$email' AND password='$password'");
         $count = mysqli_num_rows($login);
         if($count > 0){

@@ -24,6 +24,7 @@
  ?></a>
     <a href="logout.php" class="btn btn-danger">Logout</a>
     <a href="my_posts.php" class="btn btn-primary">My posts</a>
+    <a href="profile.php" class="btn btn-primary">Profile</a>
 
 
     <form class="d-flex" method="get">
